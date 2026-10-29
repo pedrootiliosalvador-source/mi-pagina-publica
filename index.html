@@ -4,497 +4,552 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal Leviatán | Pedro Otilio Salvador Méndez</title>
-  <meta name="description" content="Portafolio público y gratuito de Pedro Otilio Salvador Méndez." />
+  <meta name="description" content="Portafolio digital público y premium visualmente, gratis para todo el mundo." />
   <style>
-    :root{
-      --bg:#040b16;
-      --bg2:#0d1830;
-      --panel:#0f1d35;
-      --panel2:#132744;
-      --line:#284d82;
-      --text:#edf8ff;
-      --muted:#b8d4f6;
-      --cyan:#2ad7ff;
-      --blue:#4da9ff;
-      --violet:#8f7bff;
-      --gold:#f4cc73;
-      --green:#82f7bf;
-      --shadow: rgba(42, 215, 255, 0.22);
+    :root {
+      --bg: #040b15;
+      --bg-2: #071522;
+      --panel: rgba(11, 20, 32, 0.76);
+      --panel-2: rgba(26, 35, 52, 0.9);
+      --text: #eafcff;
+      --muted: #bfdaf8;
+      --cyan: #2ad8ff;
+      --blue: #4ba2ff;
+      --violet: #8b72ff;
+      --gold: #f3c96d;
+      --green: #72ff9e;
+      --red: #ff5d5d;
+      --orange: #ff994b;
+      --shadow: rgba(42, 216, 255, 0.22);
+      --shadow-red: rgba(255, 98, 98, 0.22);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body{
+    body {
       font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(77,169,255,0.18), transparent 25%),
-        radial-gradient(circle at bottom right, rgba(143,123,255,0.20), transparent 22%),
-        var(--bg);
+        radial-gradient(circle at 10% 10%, rgba(93, 209, 255, 0.12), transparent 26%),
+        radial-gradient(circle at 90% 85%, rgba(255, 89, 89, 0.12), transparent 22%),
+        linear-gradient(135deg, #020811 0%, #061522 35%, #040b15 100%);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(0,0,0,0) 0,
+          rgba(0,0,0,0) 1px,
+          rgba(146, 255, 190, 0.03) 1px,
+          rgba(146, 255, 190, 0.03) 2px
+        );
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.75;
+    }
+
+    canvas#matrix {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.9;
     }
 
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
-    .container{
-      width: min(1120px, calc(100% - 28px));
+    .container {
+      width: min(1180px, calc(100% - 28px));
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    header{
+    header {
       position: sticky;
       top: 0;
-      z-index: 30;
-      background: rgba(4,11,22,0.78);
-      backdrop-filter: blur(12px);
+      z-index: 40;
+      background: rgba(4, 11, 22, 0.74);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .nav{
-      min-height: 76px;
+    .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      min-height: 80px;
+      gap: 18px;
     }
 
-    .brand{
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      letter-spacing: 1px;
       font-weight: 700;
-      font-size: 0.98rem;
+      letter-spacing: 1px;
+      font-size: 0.96rem;
     }
 
-    .brand-mark{
+    .brand-mark {
       width: 42px;
       height: 42px;
-      border-radius: 14px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--cyan), var(--violet));
-      color: #051827;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--green), var(--cyan), var(--violet));
+      color: #061b21;
       font-weight: 900;
-      box-shadow: 0 0 24px var(--shadow);
+      box-shadow: 0 0 30px rgba(114,255,158,0.35);
     }
 
-    .nav-links{
-      display:flex;
-      gap:22px;
-      font-size:0.95rem;
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       color: var(--muted);
+      font-size: 0.95rem;
     }
 
-    .nav-links a:hover{ color: var(--text); }
+    .nav-links a:hover { color: var(--text); }
 
-    .btn{
-      display:inline-block;
-      padding: 13px 24px;
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
       border-radius: 12px;
       font-weight: 700;
       transition: 0.25s ease;
       border: 1px solid transparent;
     }
 
-    .btn-primary{
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      color: #03141e;
-      box-shadow: 0 10px 28px rgba(42, 215, 255, 0.28);
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      color: #01161b;
+      box-shadow: 0 12px 25px rgba(114,255,158,0.2);
     }
 
-    .btn-primary:hover{
+    .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 30px rgba(42, 215, 255, 0.35);
+      box-shadow: 0 18px 30px rgba(114,255,158,0.24);
     }
 
-    .btn-secondary{
+    .btn-secondary {
       background: rgba(255,255,255,0.02);
-      border-color: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.09);
       color: var(--text);
     }
 
-    .btn-secondary:hover{
-      background: rgba(42, 215, 255, 0.06);
-      border-color: rgba(42, 215, 255, 0.35);
+    .btn-secondary:hover {
+      background: rgba(41,216,255,0.06);
+      border-color: rgba(41,216,255,0.28);
     }
 
-    .hero{
-      padding: 68px 0 54px;
+    .hero {
+      padding: 70px 0 52px;
     }
 
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 34px;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 36px;
       align-items: center;
     }
 
-    .eyebrow{
-      display:inline-block;
+    .eyebrow {
+      display: inline-block;
       padding: 8px 14px;
-      font-size: 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-size: 0.72rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      border-radius: 999px;
-      background: rgba(42,215,255,0.08);
-      border: 1px solid rgba(42,215,255,0.28);
-      color: var(--cyan);
-      margin-bottom: 18px;
+      background: rgba(114,255,158,0.08);
+      border: 1px solid rgba(114,255,158,0.25);
+      color: var(--green);
+      box-shadow: inset 0 0 20px rgba(114,255,158,0.08);
     }
 
-    h1{
-      font-size: clamp(2.7rem, 5.2vw, 5rem);
+    h1 {
+      font-size: clamp(2.8rem, 5vw, 5.4rem);
       line-height: 1.04;
-      letter-spacing: -0.05em;
-      margin-bottom: 18px;
+      letter-spacing: -0.06em;
       font-weight: 900;
+      margin-bottom: 18px;
     }
 
-    .gradient-text{
-      background: linear-gradient(135deg, var(--cyan), var(--violet), var(--gold));
+    .gradient-text {
+      background: linear-gradient(135deg, var(--green), var(--cyan), var(--violet), var(--gold));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .hero p{
-      color: var(--muted);
+    .lead {
       max-width: 620px;
-      font-size: 1.06rem;
-      margin-bottom: 26px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 28px;
     }
 
-    .hero-actions{
-      display:flex;
-      gap:14px;
+    .hero-actions {
+      display: flex;
+      gap: 14px;
       flex-wrap: wrap;
       margin-bottom: 26px;
     }
 
-    .stats{
-      display:flex;
-      gap:18px;
+    .stats {
+      display: flex;
+      gap: 18px;
       flex-wrap: wrap;
     }
 
-    .stat{
-      min-width: 135px;
-      background: rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
+    .stat {
+      min-width: 138px;
       padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 0 14px rgba(41,216,255,0.04);
     }
 
-    .stat strong{
-      display:block;
+    .stat strong {
+      display: block;
       font-size: 1.5rem;
       line-height: 1.1;
     }
 
-    .stat span{
-      color: var(--muted);
+    .stat span {
       font-size: 0.8rem;
+      color: var(--muted);
     }
 
-    .showcase{
+    .visual-box {
       position: relative;
-      background: linear-gradient(180deg, rgba(18,31,55,0.95), rgba(9,17,30,0.95));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 26px;
-      padding: 24px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+      min-height: 620px;
+      border-radius: 30px;
       overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(9,15,25,0.20), rgba(9,15,25,0.50)),
+        url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.36);
     }
 
-    .showcase::before{
+    .visual-box::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(42,215,255,0.16), transparent 30%);
+      background:
+        linear-gradient(135deg, rgba(9,17,28,0.52), rgba(14,20,30,0.18), rgba(255,84,84,0.16)),
+        linear-gradient(180deg, rgba(41,217,255,0.10), rgba(114,255,158,0.06));
       pointer-events: none;
     }
 
-    .mini-box{
-      position: relative;
+    .visual-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: end;
+      padding: 24px;
       z-index: 1;
-      background: rgba(255,255,255,0.02);
+    }
+
+    .profile-card {
+      width: 100%;
+      background: rgba(9, 18, 30, 0.68);
+      backdrop-filter: blur(14px);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 18px 18px 16px;
-      margin-bottom: 16px;
+      border-radius: 22px;
+      padding: 20px 18px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.24);
     }
 
-    .label{
-      color: var(--muted);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 1.6px;
-      margin-bottom: 10px;
-    }
-
-    .big-title{
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -0.06em;
-    }
-
-    .pill-row{
-      position: relative;
-      z-index: 1;
-      display:flex;
+    .chip-row {
+      display: flex;
+      gap: 10px;
       flex-wrap: wrap;
-      gap:10px;
-      margin-top: 12px;
+      margin-bottom: 12px;
     }
 
-    .pill{
-      padding: 8px 12px;
+    .chip {
+      padding: 7px 10px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      border: 1px solid rgba(114,255,158,0.22);
+      background: rgba(114,255,158,0.08);
+      font-size: 0.7rem;
       font-weight: 700;
-      border: 1px solid rgba(42,215,255,0.25);
-      background: rgba(42,215,255,0.08);
-      color: var(--cyan);
+      color: var(--green);
     }
 
-    section{
-      padding: 34px 0 20px;
+    .profile-card h3 {
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
     }
 
-    .section-header{
+    .profile-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .cube-wrap {
+      position: absolute;
+      top: 28px;
+      right: 26px;
+      z-index: 2;
+      width: 190px;
+      height: 190px;
+      display: grid;
+      place-items: center;
+      perspective: 900px;
+    }
+
+    .cube {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      transform-style: preserve-3d;
+      animation: spin 13s linear infinite;
+      filter: drop-shadow(0 0 18px rgba(114,255,158,0.28));
+    }
+
+    @keyframes spin {
+      0% { transform: rotateX(-18deg) rotateY(0deg); }
+      100% { transform: rotateX(-18deg) rotateY(360deg); }
+    }
+
+    .face {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      border: 1px solid rgba(41,216,255,0.24);
+      background: rgba(8,16,26,0.7);
+      box-shadow: inset 0 0 25px rgba(41,216,255,0.08);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      font-weight: 900;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    .front  { transform: translateZ(60px); }
+    .back   { transform: rotateY(180deg) translateZ(60px); }
+    .right  { transform: rotateY(90deg) translateZ(60px); }
+    .left   { transform: rotateY(-90deg) translateZ(60px); }
+    .top    { transform: rotateX(90deg) translateZ(60px); }
+    .bottom { transform: rotateX(-90deg) translateZ(60px); }
+
+    section { padding: 34px 0 22px; }
+
+    .section-header {
       margin-bottom: 22px;
     }
 
-    .section-header h2{
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      margin-bottom: 10px;
+    .section-header h2 {
+      font-size: clamp(1.9rem, 3vw, 2.9rem);
       letter-spacing: -0.04em;
-    }
-
-    .section-header p{
-      color: var(--muted);
-      max-width: 720px;
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:22px;
-    }
-
-    .card{
-      background: linear-gradient(180deg, rgba(16,29,55,0.9), rgba(10,19,32,0.8));
-      border:1px solid rgba(255,255,255,0.07);
-      border-radius: 22px;
-      padding: 25px 22px;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .card:hover{
-      transform: translateY(-4px);
-      border-color: rgba(42,215,255,0.3);
-    }
-
-    .icon{
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display:grid;
-      place-items:center;
-      font-size: 1.5rem;
-      background: linear-gradient(135deg, rgba(42,215,255,0.18), rgba(143,123,255,0.14));
-      border: 1px solid rgba(42,215,255,0.2);
-      margin-bottom: 16px;
-      color: var(--cyan);
-    }
-
-    .card h3{
       margin-bottom: 10px;
-      font-size: 1.25rem;
     }
 
-    .card p{
+    .section-header p {
+      max-width: 760px;
       color: var(--muted);
-      font-size: 0.98rem;
     }
 
-    .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:22px;
-    }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 
-    .project{
-      background: linear-gradient(180deg, rgba(15,27,46,0.9), rgba(9,17,29,0.8));
+    .card {
+      background: linear-gradient(180deg, rgba(15,27,44,0.92), rgba(9,17,28,0.82));
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 22px;
-      overflow:hidden;
+      padding: 24px 22px;
       transition: transform 0.25s ease, border-color 0.25s ease;
     }
 
-    .project:hover{
+    .card:hover {
       transform: translateY(-4px);
-      border-color: rgba(42,215,255,0.3);
+      border-color: rgba(41,216,255,0.3);
     }
 
-    .project-visual{
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(114,255,158,0.12), rgba(41,216,255,0.14));
+      border: 1px solid rgba(41,216,255,0.2);
+      margin-bottom: 16px;
+      color: var(--green);
+      font-size: 1.5rem;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p { color: var(--muted); font-size: 0.97rem; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .project {
+      background: linear-gradient(180deg, rgba(15,27,44,0.92), rgba(9,17,28,0.82));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-4px);
+      border-color: rgba(41,216,255,0.3);
+    }
+
+    .project-visual {
       height: 180px;
-      background:
-        radial-gradient(circle at 22% 20%, rgba(42,215,255,0.30), transparent 20%),
-        radial-gradient(circle at 80% 14%, rgba(143,123,255,0.28), transparent 22%),
-        linear-gradient(135deg, #0d1830, #122642 60%, #0b1422);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
       position: relative;
       overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,94,94,0.20), transparent 18%),
+        radial-gradient(circle at 80% 14%, rgba(41,216,255,0.24), transparent 20%),
+        linear-gradient(135deg, #0d1b30, #142947 56%, #0e1623);
     }
 
-    .project-visual::before{
-      content:"";
+    .project-visual::before {
+      content: "";
       position: absolute;
+      left: 22px;
+      top: 18px;
       width: 140px;
       height: 140px;
-      border: 1px solid rgba(42,215,255,0.35);
+      border: 1px solid rgba(114,255,158,0.32);
       border-radius: 18px;
-      transform: rotate(24deg);
-      left: 26px;
-      top: 20px;
-      box-shadow: 0 0 30px rgba(42,215,255,0.12);
+      transform: rotate(22deg);
+      box-shadow: 0 0 28px rgba(114,255,158,0.15);
     }
 
-    .project-body{
-      padding: 22px 20px 20px;
-    }
+    .project-body { padding: 22px 20px 20px; }
 
-    .tag{
-      display:inline-block;
-      margin-bottom: 12px;
+    .tag {
+      display: inline-block;
       padding: 7px 10px;
+      margin-bottom: 12px;
       border-radius: 999px;
-      background: rgba(130,247,191,0.08);
-      border:1px solid rgba(130,247,191,0.24);
+      background: rgba(114,255,158,0.08);
+      border: 1px solid rgba(114,255,158,0.26);
       color: var(--green);
       font-size: 0.72rem;
       font-weight: 700;
     }
 
-    .project h3{
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+    .project h3 { margin-bottom: 10px; font-size: 1.2rem; }
+    .project p { margin-bottom: 16px; color: var(--muted); font-size: 0.96rem; }
+    .project a { color: var(--cyan); font-weight: 700; }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: start;
     }
 
-    .project p{
-      color: var(--muted);
-      margin-bottom: 16px;
-      font-size: 0.96rem;
-    }
-
-    .project a{
-      color: var(--cyan);
-      font-weight: 700;
-    }
-
-    .about{
-      display:grid;
-      grid-template-columns:1.15fr 0.85fr;
-      gap:22px;
-      align-items:start;
-    }
-
-    .about-panel{
-      background: linear-gradient(180deg, rgba(15,27,46,0.9), rgba(9,17,29,0.8));
-      border:1px solid rgba(255,255,255,0.08);
+    .about-panel {
+      background: linear-gradient(180deg, rgba(15,27,44,0.92), rgba(9,17,28,0.82));
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 22px;
       padding: 24px;
     }
 
-    .about-panel p{
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
+    .about-panel p { color: var(--muted); margin-bottom: 18px; }
 
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 18px;
     }
 
-    .chip{
+    .skill {
       padding: 8px 12px;
       border-radius: 999px;
       background: rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
       color: var(--text);
       font-size: 0.78rem;
     }
 
-    .cta{
-      margin: 42px 0 68px;
-      background: linear-gradient(135deg, rgba(42,215,255,0.09), rgba(143,123,255,0.08));
-      border:1px solid rgba(42,215,255,0.16);
-      border-radius: 26px;
+    .cta {
+      margin: 44px 0 72px;
       padding: 28px 24px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:18px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(42,216,255,0.08), rgba(255,93,93,0.05), rgba(114,255,158,0.08));
+      border: 1px solid rgba(41,216,255,0.16);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
       flex-wrap: wrap;
     }
 
-    .cta h3{
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      margin-bottom: 8px;
-    }
+    .cta h3 { margin-bottom: 8px; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    .cta p { color: var(--muted); }
 
-    .cta p{
-      color: var(--muted);
-    }
-
-    footer{
-      text-align:center;
-      padding: 22px 0 42px;
+    footer {
+      text-align: center;
+      padding: 22px 0 46px;
       color: var(--muted);
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    @media (max-width: 940px){
-      .hero-grid, .about, .projects-grid, .grid-3{
-        grid-template-columns: 1fr;
-      }
-      .nav{
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 14px 0;
-      }
-      .nav-links{
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+    @media (max-width: 980px) {
+      .hero-grid, .about, .projects-grid, .grid-3 { grid-template-columns: 1fr; }
+      .visual-box { min-height: 500px; }
     }
 
-    @media (max-width: 560px){
-      .hero{
-        padding-top: 48px;
-      }
-      .hero-actions{
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn{
-        width: 100%;
-        text-align: center;
-      }
-      .stats{
-        display:grid;
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
+    @media (max-width: 560px) {
+      .hero { padding-top: 52px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; text-align: center; }
+      .stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .nav { justify-content: center; padding: 14px 0; flex-wrap: wrap; }
+      .nav-links { justify-content: center; }
+      .cube-wrap { width: 150px; height: 150px; top: 18px; right: 18px; }
+      .cube { width: 90px; height: 90px; }
+      .face { width: 90px; height: 90px; }
+      .front { transform: translateZ(45px); }
+      .back { transform: rotateY(180deg) translateZ(45px); }
+      .right { transform: rotateY(90deg) translateZ(45px); }
+      .left { transform: rotateY(-90deg) translateZ(45px); }
+      .top { transform: rotateX(90deg) translateZ(45px); }
+      .bottom { transform: rotateX(-90deg) translateZ(45px); }
     }
   </style>
 </head>
 <body>
+  <canvas id="matrix"></canvas>
+
   <header>
     <div class="container nav">
       <div class="brand">
@@ -507,6 +562,7 @@
         <a href="#servicios">Servicios</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
       </nav>
 
       <a class="btn btn-primary" href="#contacto">Ver más</a>
@@ -518,11 +574,10 @@
       <div class="container hero-grid">
         <div>
           <span class="eyebrow">Abierto al público</span>
-          <h1>Hola, soy <span class="gradient-text">Pedro</span><br>y este es mi espacio digital.</h1>
-          <p>
-            Aquí presento mi trabajo, mis ideas, mis proyectos y todo lo que sé hacer.
-            Es una página pública, gratuita y con una calidad visual que se ve profesional
-            sin necesidad de cobrarle a nadie.
+          <h1>Hola, soy <span class="gradient-text">Pedro</span><br>y aquí va mi presencia digital.</h1>
+          <p class="lead">
+            Aquí presento mi trabajo, mis ideas, mis proyectos y todo lo que sé hacer. Es una web pública, totalmente gratis,
+            con estilo fuerte y calidad visual que llama mucho la atención.
           </p>
 
           <div class="hero-actions">
@@ -546,22 +601,28 @@
           </div>
         </div>
 
-        <div class="showcase">
-          <div class="mini-box">
-            <div class="label">Proyecto destacado</div>
-            <div class="big-title">Leviatán</div>
+        <div class="visual-box">
+          <div class="cube-wrap">
+            <div class="cube">
+              <div class="face front">Inicio</div>
+              <div class="face back">Proy</div>
+              <div class="face right">Skills</div>
+              <div class="face left">Yo</div>
+              <div class="face top">Contacto</div>
+              <div class="face bottom">Portal</div>
+            </div>
           </div>
 
-          <div class="mini-box">
-            <div class="label">Especialidad</div>
-            <div style="font-size:1.2rem; font-weight:700;">Diseño • Tecnología • Proyectos</div>
-          </div>
-
-          <div class="pill-row">
-            <span class="pill">HTML</span>
-            <span class="pill">CSS</span>
-            <span class="pill">GitHub</span>
-            <span class="pill">Creatividad</span>
+          <div class="visual-content">
+            <div class="profile-card">
+              <div class="chip-row">
+                <span class="chip">Leviatán</span>
+                <span class="chip">Pro</span>
+                <span class="chip">Digital</span>
+              </div>
+              <h3>Pedro Otilio</h3>
+              <p>Diseño, tecnología, ideas y presencia con actitud.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -571,26 +632,26 @@
       <div class="container">
         <div class="section-header">
           <h2>Lo que hago</h2>
-          <p>Me enfoco en crear soluciones digitales con identidad, claridad y presencia visual.</p>
+          <p>Diseño y desarrollo soluciones digitales con identidad, claridad, valor visual y buen nivel técnico.</p>
         </div>
 
         <div class="grid-3">
           <article class="card">
             <div class="icon">⚙️</div>
             <h3>Desarrollo web</h3>
-            <p>Páginas funcionales, modernas y limpias que muestran tu trabajo con calidad.</p>
+            <p>Páginas funcionales y modernas que muestran el trabajo con calidad, presencia y buena estructura.</p>
           </article>
 
           <article class="card">
             <div class="icon">🎨</div>
             <h3>Diseño visual</h3>
-            <p>Interfaces con estilo profesional, mejorando la experiencia y la percepción del proyecto.</p>
+            <p>Interfaces con estética fuerte, impacto visual y una narrativa clara de lo que representa mi trabajo.</p>
           </article>
 
           <article class="card">
             <div class="icon">🚀</div>
             <h3>Proyectos digitales</h3>
-            <p>Ideas bien estructuradas que pueden verse, compartirse y entenderse fácilmente.</p>
+            <p>Ideas y conceptos creados para ser vistos, entendidos y valorados por personas de cualquier parte.</p>
           </article>
         </div>
       </div>
@@ -600,7 +661,7 @@
       <div class="container">
         <div class="section-header">
           <h2>Proyectos destacados</h2>
-          <p>Un vistazo a lo que estoy desarrollando y hacia dónde va mi trabajo.</p>
+          <p>Un recorrido por lo que estoy haciendo y en qué dirección va mi trabajo y mi presencia digital.</p>
         </div>
 
         <div class="projects-grid">
@@ -609,33 +670,33 @@
             <div class="project-body">
               <span class="tag">Proyecto principal</span>
               <h3>Leviatán v15</h3>
-              <p>Un proyecto con enfoque creativo y técnico para mostrar lo que sé hacer.</p>
+              <p>Un proyecto con enfoque creativo y técnico para mostrar lo que sé hacer y hacia dónde apunta mi visión.</p>
               <a href="https://github.com/pedrootiliosalvador-source/Leviatan-v15" target="_blank" rel="noopener">Ver proyecto →</a>
             </div>
           </article>
 
           <article class="project">
             <div class="project-visual" style="background:
-              radial-gradient(circle at 25% 20%, rgba(130,247,191,0.30), transparent 18%),
-              radial-gradient(circle at 80% 14%, rgba(42,215,255,0.22), transparent 24%),
-              linear-gradient(135deg, #102130, #152d46 58%, #0d1724);"></div>
+              radial-gradient(circle at 23% 20%, rgba(114,255,158,0.28), transparent 20%),
+              radial-gradient(circle at 80% 14%, rgba(41,216,255,0.24), transparent 22%),
+              linear-gradient(135deg, #112230, #15304d 58%, #0d1724);"></div>
             <div class="project-body">
               <span class="tag">Portafolio</span>
               <h3>Mi presencia digital</h3>
-              <p>Espacio para mostrar mi proceso, mi nivel y mi trabajo con calidad profesional.</p>
+              <p>Espacio para mostrar mi proceso, mi nivel y mi trabajo con mejor presencia visual y claridad.</p>
               <a href="#inicio">Explorar →</a>
             </div>
           </article>
 
           <article class="project">
             <div class="project-visual" style="background:
-              radial-gradient(circle at 18% 18%, rgba(244,204,115,0.28), transparent 18%),
-              radial-gradient(circle at 82% 18%, rgba(143,123,255,0.26), transparent 20%),
-              linear-gradient(135deg, #101d2b, #162847 55%, #0f1827);"></div>
+              radial-gradient(circle at 18% 18%, rgba(255,153,75,0.25), transparent 18%),
+              radial-gradient(circle at 82% 18%, rgba(140,114,255,0.26), transparent 20%),
+              linear-gradient(135deg, #0f1d2d, #172d47 55%, #101a27);"></div>
             <div class="project-body">
               <span class="tag">Ideas</span>
               <h3>Conceptos y propuestas</h3>
-              <p>Diseños y conceptos orientados a crear una identidad visual sólida y moderna.</p>
+              <p>Diseños y conceptos orientados a destacar una marca personal, sólida, moderna y con actitud.</p>
               <a href="#contacto">Conocer más →</a>
             </div>
           </article>
@@ -647,45 +708,48 @@
       <div class="container">
         <div class="section-header">
           <h2>Sobre mí</h2>
-          <p>Mi enfoque es convertir ideas en presencia digital con valor, orden y estilo.</p>
+          <p>Mi enfoque es convertir ideas en presencia digital con identidad, orden visual y un nivel profesional claro.</p>
         </div>
 
         <div class="about">
           <div class="about-panel">
             <p>
-              Soy Pedro Otilio Salvador Méndez y este sitio es una forma de mostrar lo que sé hacer:
-              desarrollo, diseño, creatividad y trabajo serio con visión clara.
+              Soy Pedro Otilio Salvador Méndez y este espacio funciona como una pieza de mi trabajo digital: una forma de mostrar lo que sé hacer,
+              lo que he aprendido y cómo lo aplico con estilo.
             </p>
             <p>
-              No busca cobrarle a nadie, sino compartir trabajo de calidad para que la gente conozca,
-              entienda y valore lo que hago. Es una página pública y abierta para el mundo.
+              No es una web de pago ni una página con cobro. Es una presencia pública, abierta y de calidad, pensada para que la gente pueda ver y entender
+              mi nivel desde el primer vistazo.
             </p>
 
-            <div class="chips">
-              <span class="chip">HTML</span>
-              <span class="chip">CSS</span>
-              <span class="chip">GitHub</span>
-              <span class="chip">Diseño</span>
-              <span class="chip">Creatividad</span>
-              <span class="chip">Proyectos</span>
+            <div class="skills">
+              <span class="skill">HTML</span>
+              <span class="skill">CSS</span>
+              <span class="skill">GitHub</span>
+              <span class="skill">Diseño</span>
+              <span class="skill">Creatividad</span>
+              <span class="skill">Proyectos</span>
             </div>
           </div>
 
           <div class="about-panel">
-            <div class="mini-box" style="margin-bottom:14px;">
-              <div class="label">Perfil</div>
-              <div style="font-size:1.2rem; font-weight:700;">Desarrollador / Diseñador / Creador</div>
+            <div class="chip-row" style="margin-bottom: 14px;">
+              <span class="chip">Perfil</span>
+            </div>
+            <div class="profile-card" style="padding: 18px; background: rgba(255,255,255,0.02);">
+              <h3 style="font-size: 1.35rem; margin-bottom: 10px;">Desarrollador / Diseñador / Creador</h3>
+              <p style="margin:0; color: var(--muted);">Trabajando con identidad visual, organización y presencia digital real.</p>
             </div>
 
-            <div class="mini-box" style="margin-bottom:14px;">
-              <div class="label">Misión</div>
-              <div style="color:var(--muted);">Crear soluciones con estilo y valor para quienes las vean.</div>
+            <div class="chip-row" style="margin: 18px 0 14px;">
+              <span class="chip">Misión</span>
             </div>
+            <p>Crear soluciones con valor, claridad y estilo para quienes las vean.</p>
 
-            <div class="mini-box">
-              <div class="label">Visión</div>
-              <div style="color:var(--muted);">Hacer visible el talento y dejar una marca digital clara y sólida.</div>
+            <div class="chip-row" style="margin: 0 0 14px;">
+              <span class="chip">Visión</span>
             </div>
+            <p>Hacer visible el talento y dejar una marca digital fuerte, clara y memorable.</p>
           </div>
         </div>
       </div>
@@ -696,7 +760,7 @@
         <div class="cta">
           <div>
             <h3>Todos pueden verlo, sin costo</h3>
-            <p>Esta página es pública, abierta y pensada para mostrar trabajo con calidad.</p>
+            <p>Esta web está abierta para mostrar trabajo con calidad, presencia y claridad.</p>
           </div>
 
           <div class="hero-actions" style="margin:0;">
@@ -709,11 +773,59 @@
   </main>
 
   <footer>
-    © <span id="year"></span> Pedro Otilio Salvador Méndez — Acceso libre para todos
+    © <span id="year"></span> Pedro Otilio Salvador Méndez — acceso libre para todos
   </footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ<>*+-/\\{}[]()@#$%&';
+    let w = 0;
+    let h = 0;
+    let columns = [];
+    let fontSize = 18;
+
+    function resizeCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      columns.length = 0;
+      const cols = Math.ceil(w / fontSize);
+      for (let i = 0; i < cols; i++) {
+        columns.push(Math.random() * -100);
+      }
+    }
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(2, 10, 18, 0.14)';
+      ctx.fillRect(0, 0, w, h);
+
+      for (let i = 0; i < columns.length; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        const y = columns[i] * fontSize;
+
+        const green = 114 + Math.random() * 100;
+        const red = 180 + Math.random() * 70;
+        const alpha = 0.7 + Math.random() * 0.3;
+
+        const isHot = Math.random() > 0.92;
+        ctx.fillStyle = isHot ? `rgba(${red}, 70, 70, ${alpha})` : `rgba(110, ${green}, 120, ${alpha})`;
+        ctx.font = fontSize + 'px monospace';
+        ctx.fillText(char, x, y);
+
+        if (y > h && Math.random() > 0.98) {
+          columns[i] = 0;
+        }
+        columns[i] += 1;
+      }
+      requestAnimationFrame(drawMatrix);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    requestAnimationFrame(drawMatrix);
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
