@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Leviatán | Pedro Otilio Salvador Méndez</title>
+  <meta name="description" content="Portafolio público y gratuito de Pedro Otilio Salvador Méndez." />
+  <style>
+    :root{
+      --bg:#040b16;
+      --bg2:#0d1830;
+      --panel:#0f1d35;
+      --panel2:#132744;
+      --line:#284d82;
+      --text:#edf8ff;
+      --muted:#b8d4f6;
+      --cyan:#2ad7ff;
+      --blue:#4da9ff;
+      --violet:#8f7bff;
+      --gold:#f4cc73;
+      --green:#82f7bf;
+      --shadow: rgba(42, 215, 255, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(77,169,255,0.18), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(143,123,255,0.20), transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container{
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(4,11,22,0.78);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav{
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 1px;
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .brand-mark{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #051827;
+      font-weight: 900;
+      box-shadow: 0 0 24px var(--shadow);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:22px;
+      font-size:0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover{ color: var(--text); }
+
+    .btn{
+      display:inline-block;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary{
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #03141e;
+      box-shadow: 0 10px 28px rgba(42, 215, 255, 0.28);
+    }
+
+    .btn-primary:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(42, 215, 255, 0.35);
+    }
+
+    .btn-secondary{
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover{
+      background: rgba(42, 215, 255, 0.06);
+      border-color: rgba(42, 215, 255, 0.35);
+    }
+
+    .hero{
+      padding: 68px 0 54px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding: 8px 14px;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 999px;
+      background: rgba(42,215,255,0.08);
+      border: 1px solid rgba(42,215,255,0.28);
+      color: var(--cyan);
+      margin-bottom: 18px;
+    }
+
+    h1{
+      font-size: clamp(2.7rem, 5.2vw, 5rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+      font-weight: 900;
+    }
+
+    .gradient-text{
+      background: linear-gradient(135deg, var(--cyan), var(--violet), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p{
+      color: var(--muted);
+      max-width: 620px;
+      font-size: 1.06rem;
+      margin-bottom: 26px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .stats{
+      display:flex;
+      gap:18px;
+      flex-wrap: wrap;
+    }
+
+    .stat{
+      min-width: 135px;
+      background: rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .stat span{
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .showcase{
+      position: relative;
+      background: linear-gradient(180deg, rgba(18,31,55,0.95), rgba(9,17,30,0.95));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+      overflow: hidden;
+    }
+
+    .showcase::before{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(42,215,255,0.16), transparent 30%);
+      pointer-events: none;
+    }
+
+    .mini-box{
+      position: relative;
+      z-index: 1;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      margin-bottom: 16px;
+    }
+
+    .label{
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      margin-bottom: 10px;
+    }
+
+    .big-title{
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .pill-row{
+      position: relative;
+      z-index: 1;
+      display:flex;
+      flex-wrap: wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+
+    .pill{
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid rgba(42,215,255,0.25);
+      background: rgba(42,215,255,0.08);
+      color: var(--cyan);
+    }
+
+    section{
+      padding: 34px 0 20px;
+    }
+
+    .section-header{
+      margin-bottom: 22px;
+    }
+
+    .section-header h2{
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 10px;
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p{
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(16,29,55,0.9), rgba(10,19,32,0.8));
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius: 22px;
+      padding: 25px 22px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(42,215,255,0.3);
+    }
+
+    .icon{
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, rgba(42,215,255,0.18), rgba(143,123,255,0.14));
+      border: 1px solid rgba(42,215,255,0.2);
+      margin-bottom: 16px;
+      color: var(--cyan);
+    }
+
+    .card h3{
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .card p{
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:22px;
+    }
+
+    .project{
+      background: linear-gradient(180deg, rgba(15,27,46,0.9), rgba(9,17,29,0.8));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      overflow:hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project:hover{
+      transform: translateY(-4px);
+      border-color: rgba(42,215,255,0.3);
+    }
+
+    .project-visual{
+      height: 180px;
+      background:
+        radial-gradient(circle at 22% 20%, rgba(42,215,255,0.30), transparent 20%),
+        radial-gradient(circle at 80% 14%, rgba(143,123,255,0.28), transparent 22%),
+        linear-gradient(135deg, #0d1830, #122642 60%, #0b1422);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-visual::before{
+      content:"";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(42,215,255,0.35);
+      border-radius: 18px;
+      transform: rotate(24deg);
+      left: 26px;
+      top: 20px;
+      box-shadow: 0 0 30px rgba(42,215,255,0.12);
+    }
+
+    .project-body{
+      padding: 22px 20px 20px;
+    }
+
+    .tag{
+      display:inline-block;
+      margin-bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(130,247,191,0.08);
+      border:1px solid rgba(130,247,191,0.24);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .project h3{
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .project p{
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 0.96rem;
+    }
+
+    .project a{
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .about{
+      display:grid;
+      grid-template-columns:1.15fr 0.85fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .about-panel{
+      background: linear-gradient(180deg, rgba(15,27,46,0.9), rgba(9,17,29,0.8));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .about-panel p{
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 18px;
+    }
+
+    .chip{
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 0.78rem;
+    }
+
+    .cta{
+      margin: 42px 0 68px;
+      background: linear-gradient(135deg, rgba(42,215,255,0.09), rgba(143,123,255,0.08));
+      border:1px solid rgba(42,215,255,0.16);
+      border-radius: 26px;
+      padding: 28px 24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      flex-wrap: wrap;
+    }
+
+    .cta h3{
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      margin-bottom: 8px;
+    }
+
+    .cta p{
+      color: var(--muted);
+    }
+
+    footer{
+      text-align:center;
+      padding: 22px 0 42px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @media (max-width: 940px){
+      .hero-grid, .about, .projects-grid, .grid-3{
+        grid-template-columns: 1fr;
+      }
+      .nav{
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 14px 0;
+      }
+      .nav-links{
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 560px){
+      .hero{
+        padding-top: 48px;
+      }
+      .hero-actions{
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn{
+        width: 100%;
+        text-align: center;
+      }
+      .stats{
+        display:grid;
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <span>PORTAL LEVIATÁN</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+      </nav>
+
+      <a class="btn btn-primary" href="#contacto">Ver más</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Abierto al público</span>
+          <h1>Hola, soy <span class="gradient-text">Pedro</span><br>y este es mi espacio digital.</h1>
+          <p>
+            Aquí presento mi trabajo, mis ideas, mis proyectos y todo lo que sé hacer.
+            Es una página pública, gratuita y con una calidad visual que se ve profesional
+            sin necesidad de cobrarle a nadie.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+            <a class="btn btn-secondary" href="https://github.com/pedrootiliosalvador-source" target="_blank" rel="noopener">GitHub</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>+5</strong>
+              <span>Proyectos</span>
+            </div>
+            <div class="stat">
+              <strong>100%</strong>
+              <span>Gratis</span>
+            </div>
+            <div class="stat">
+              <strong>Abierto</strong>
+              <span>Para todos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase">
+          <div class="mini-box">
+            <div class="label">Proyecto destacado</div>
+            <div class="big-title">Leviatán</div>
+          </div>
+
+          <div class="mini-box">
+            <div class="label">Especialidad</div>
+            <div style="font-size:1.2rem; font-weight:700;">Diseño • Tecnología • Proyectos</div>
+          </div>
+
+          <div class="pill-row">
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+            <span class="pill">GitHub</span>
+            <span class="pill">Creatividad</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-header">
+          <h2>Lo que hago</h2>
+          <p>Me enfoco en crear soluciones digitales con identidad, claridad y presencia visual.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">⚙️</div>
+            <h3>Desarrollo web</h3>
+            <p>Páginas funcionales, modernas y limpias que muestran tu trabajo con calidad.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎨</div>
+            <h3>Diseño visual</h3>
+            <p>Interfaces con estilo profesional, mejorando la experiencia y la percepción del proyecto.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🚀</div>
+            <h3>Proyectos digitales</h3>
+            <p>Ideas bien estructuradas que pueden verse, compartirse y entenderse fácilmente.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <div class="container">
+        <div class="section-header">
+          <h2>Proyectos destacados</h2>
+          <p>Un vistazo a lo que estoy desarrollando y hacia dónde va mi trabajo.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project">
+            <div class="project-visual"></div>
+            <div class="project-body">
+              <span class="tag">Proyecto principal</span>
+              <h3>Leviatán v15</h3>
+              <p>Un proyecto con enfoque creativo y técnico para mostrar lo que sé hacer.</p>
+              <a href="https://github.com/pedrootiliosalvador-source/Leviatan-v15" target="_blank" rel="noopener">Ver proyecto →</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-visual" style="background:
+              radial-gradient(circle at 25% 20%, rgba(130,247,191,0.30), transparent 18%),
+              radial-gradient(circle at 80% 14%, rgba(42,215,255,0.22), transparent 24%),
+              linear-gradient(135deg, #102130, #152d46 58%, #0d1724);"></div>
+            <div class="project-body">
+              <span class="tag">Portafolio</span>
+              <h3>Mi presencia digital</h3>
+              <p>Espacio para mostrar mi proceso, mi nivel y mi trabajo con calidad profesional.</p>
+              <a href="#inicio">Explorar →</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-visual" style="background:
+              radial-gradient(circle at 18% 18%, rgba(244,204,115,0.28), transparent 18%),
+              radial-gradient(circle at 82% 18%, rgba(143,123,255,0.26), transparent 20%),
+              linear-gradient(135deg, #101d2b, #162847 55%, #0f1827);"></div>
+            <div class="project-body">
+              <span class="tag">Ideas</span>
+              <h3>Conceptos y propuestas</h3>
+              <p>Diseños y conceptos orientados a crear una identidad visual sólida y moderna.</p>
+              <a href="#contacto">Conocer más →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi">
+      <div class="container">
+        <div class="section-header">
+          <h2>Sobre mí</h2>
+          <p>Mi enfoque es convertir ideas en presencia digital con valor, orden y estilo.</p>
+        </div>
+
+        <div class="about">
+          <div class="about-panel">
+            <p>
+              Soy Pedro Otilio Salvador Méndez y este sitio es una forma de mostrar lo que sé hacer:
+              desarrollo, diseño, creatividad y trabajo serio con visión clara.
+            </p>
+            <p>
+              No busca cobrarle a nadie, sino compartir trabajo de calidad para que la gente conozca,
+              entienda y valore lo que hago. Es una página pública y abierta para el mundo.
+            </p>
+
+            <div class="chips">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">GitHub</span>
+              <span class="chip">Diseño</span>
+              <span class="chip">Creatividad</span>
+              <span class="chip">Proyectos</span>
+            </div>
+          </div>
+
+          <div class="about-panel">
+            <div class="mini-box" style="margin-bottom:14px;">
+              <div class="label">Perfil</div>
+              <div style="font-size:1.2rem; font-weight:700;">Desarrollador / Diseñador / Creador</div>
+            </div>
+
+            <div class="mini-box" style="margin-bottom:14px;">
+              <div class="label">Misión</div>
+              <div style="color:var(--muted);">Crear soluciones con estilo y valor para quienes las vean.</div>
+            </div>
+
+            <div class="mini-box">
+              <div class="label">Visión</div>
+              <div style="color:var(--muted);">Hacer visible el talento y dejar una marca digital clara y sólida.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h3>Todos pueden verlo, sin costo</h3>
+            <p>Esta página es pública, abierta y pensada para mostrar trabajo con calidad.</p>
+          </div>
+
+          <div class="hero-actions" style="margin:0;">
+            <a class="btn btn-primary" href="https://github.com/pedrootiliosalvador-source" target="_blank" rel="noopener">Ver GitHub</a>
+            <a class="btn btn-secondary" href="https://github.com/pedrootiliosalvador-source/Leviatan-v15" target="_blank" rel="noopener">Abrir proyecto</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Pedro Otilio Salvador Méndez — Acceso libre para todos
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
